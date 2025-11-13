@@ -4,17 +4,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a **Laravel Package Skeleton** designed for creating Laravel packages with a focus on CRUD functionality using Inertia.js, Vue 3, and Shadcn UI. The repository contains both the package scaffold and example implementations demonstrating best practices for building full-stack CRUD applications.
+This is a **Laravel Package crud-generator** designed for creating Laravel packages with a focus on CRUD functionality using Inertia.js, Vue 3, and Shadcn UI. The repository contains both the package scaffold and example implementations demonstrating best practices for building full-stack CRUD applications.
 
 ## Package Configuration
 
-**Initial Setup**: Before using this skeleton, run the configuration script to customize placeholders:
+**Initial Setup**: Before using this isaac, run the configuration script to customize placeholders:
 
 ```bash
 php ./configure.php
 ```
 
-This interactive script replaces placeholders like `:vendor_slug`, `:package_slug`, `:author_name`, etc., throughout the codebase with your actual package details.
+This interactive script replaces placeholders like `isaac`, `isaac`, `Isaac`, etc., throughout the codebase with your actual package details.
 
 ## Development Commands
 
@@ -59,7 +59,7 @@ composer run prepare
 ### Backend (Laravel Package)
 
 **Service Provider Pattern**: The package uses `Spatie\LaravelPackageTools\PackageServiceProvider` for bootstrapping:
-- `SkeletonServiceProvider.php` - Main service provider
+- `crud-generatorServiceProvider.php` - Main service provider
 - Supports: config files, views, migrations, and Artisan commands
 
 **Example CRUD Structure** (in `example-files/`):

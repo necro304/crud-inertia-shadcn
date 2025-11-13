@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton\Database\Factories;
+namespace isaac@example.com\crud-generator\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

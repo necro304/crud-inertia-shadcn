@@ -19,7 +19,7 @@
 **Alternatives Considered**:
 - **Manual package setup**: Rejected - requires extensive boilerplate, prone to configuration errors
 - **Laravel's make:package (if existed)**: Not available in Laravel 12 core
-- **Custom package skeleton**: Rejected - reinventing proven patterns, maintenance overhead
+- **Custom package isaac**: Rejected - reinventing proven patterns, maintenance overhead
 
 **Implementation Notes**:
 - Install: `composer require spatie/laravel-package-tools`
@@ -364,7 +364,7 @@ Output levels (FR-018):
 **Alternatives Considered**:
 - **No configuration**: Rejected - not flexible for non-standard projects
 - **Required configuration**: Rejected - poor developer experience, violates "convention over configuration"
-- **Environment variables only**: Rejected - too granular, cluttered .env
+- **Environment crud-generators only**: Rejected - too granular, cluttered .env
 
 **Implementation Notes**:
 

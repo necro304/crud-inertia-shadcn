@@ -13,7 +13,7 @@ A developer wants to quickly scaffold a complete CRUD module for a new resource 
 
 **Why this priority**: This is the core value proposition - automating repetitive CRUD creation. Without this, the package has no functionality. This delivers immediate productivity gains.
 
-**Independent Test**: Can be fully tested by installing package via Composer, optionally publishing stubs (`php artisan vendor:publish --tag=crud-generator-stubs`), running the command with a resource name (e.g., `php artisan make:crud Product name:string price:decimal`), and verifying all nine files are created with correct content and naming.
+**Independent Test**: Can be fully tested by installing package via Composer, optionally publishing stubs (`php artisan vendor:publish --tag=crud-generator-stubs`), running the command with a resource name (e.g., `php artisan make:crud Product name:string price:decimal`), and verifying all 10 files are created with correct content and naming.
 
 **Acceptance Scenarios**:
 
@@ -74,7 +74,7 @@ A developer wants to define relationships (belongsTo, hasMany, morphMany) when g
 
 ### Functional Requirements
 
-- **FR-001**: System MUST generate all five CRUD layers (Model, Controller, Form Requests, Resource, Vue pages) from a single command with resource name and field definitions
+- **FR-001**: System MUST generate all five CRUD layers (10 files total: Model, Controller, 2 Form Requests, Resource, 4 Vue files, Migration) from a single command with resource name and field definitions
 - **FR-002**: System MUST support field type definitions including string, text, integer, decimal, boolean, date, datetime, timestamp, and json types with automatic migration column type mapping. Fields are required (NOT NULL) by default; append `:nullable` suffix for optional fields (e.g., `description:text:nullable`). Append `:unique` suffix for unique constraints (e.g., `email:string:unique`). Modifiers can be combined (e.g., `slug:string:unique:nullable`)
 - **FR-003**: System MUST apply consistent naming conventions across all generated files (PascalCase for classes, snake_case for tables, kebab-case for routes, plural for collections)
 - **FR-004**: Generated Models MUST include SoftDeletes trait by default (unless disabled) and Auditable contract implementation with proper imports
@@ -106,7 +106,7 @@ A developer wants to define relationships (belongsTo, hasMany, morphMany) when g
 
 ### Measurable Outcomes
 
-- **SC-001**: Developers can generate a complete CRUD module (all 9 files) in under 30 seconds with a single command execution
+- **SC-001**: Developers can generate a complete CRUD module (all 10 files) in under 30 seconds with a single command execution
 - **SC-002**: Generated code passes all Constitution quality gates (PHPStan Level 5, Laravel Pint, Pest Arch tests) without requiring manual fixes
 - **SC-003**: 90% of common CRUD use cases can be handled without editing generated code (only customization being business logic additions)
 - **SC-004**: Time to create a new CRUD module is reduced by 80% compared to manual creation (from ~60 minutes to ~12 minutes including customization)

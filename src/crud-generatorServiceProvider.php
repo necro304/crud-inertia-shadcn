@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace isaac@example.com\crud-generator;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
+use isaac@example.com\crud-generator\Commands\crud-generatorCommand;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class crud-generatorServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -16,10 +16,10 @@ class SkeletonServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('skeleton')
+            ->name('isaac')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_migration_table_name_table')
-            ->hasCommand(SkeletonCommand::class);
+            ->hasMigration('create_isaac_table')
+            ->hasCommand(crud-generatorCommand::class);
     }
 }

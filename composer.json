@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "isaac/isaac",
+    "description": "CrudGenerator",
     "keywords": [
-        ":vendor_name",
+        "A Laravel package for generating complete CRUD modules with Vue + Inertia.js + Shadcn-vue",
         "laravel",
-        ":package_slug"
+        "isaac"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/isaac/isaac",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Isaac",
+            "email": "crud-generator",
             "role": "Developer"
         }
     ],
@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "isaac@example.com\\crud-generator\\": "src/",
+            "isaac@example.com\\crud-generator\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/",
+            "isaac@example.com\\crud-generator\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -63,10 +63,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "isaac@example.com\\crud-generator\\crud-generatorServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "crud-generator": "isaac@example.com\\crud-generator\\Facades\\crud-generator"
             }
         }
     },
