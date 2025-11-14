@@ -79,44 +79,44 @@ description: "Implementation tasks for CRUD Generator Package"
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T021 [P] [US1] Feature test for basic CRUD generation in tests/Feature/CrudGenerationTest.php (test 9 files created, correct naming, basic content)
-- [ ] T022 [P] [US1] Feature test for field type support in tests/Feature/FieldTypeSupportTest.php (string, text, integer, decimal, boolean, date, datetime, timestamp, json)
-- [ ] T023 [P] [US1] Feature test for field modifiers in tests/Feature/FieldModifiersTest.php (test :nullable, :unique, combined modifiers)
-- [ ] T024 [P] [US1] Feature test for naming conventions in tests/Feature/NamingConventionTest.php (PascalCase → snake_case → kebab-case transformations)
-- [ ] T025 [P] [US1] Feature test for atomic rollback in tests/Feature/AtomicRollbackTest.php (test failure triggers deletion of all created files)
-- [ ] T026 [P] [US1] Feature test for command validation in tests/Feature/CommandValidationTest.php (invalid resource names, invalid field types, reserved words)
+- [X] T021 [P] [US1] Feature test for basic CRUD generation in tests/Feature/CrudGenerationTest.php (test 9 files created, correct naming, basic content)
+- [X] T022 [P] [US1] Feature test for field type support in tests/Feature/FieldTypeSupportTest.php (string, text, integer, decimal, boolean, date, datetime, timestamp, json)
+- [X] T023 [P] [US1] Feature test for field modifiers in tests/Feature/FieldModifiersTest.php (test :nullable, :unique, combined modifiers)
+- [X] T024 [P] [US1] Feature test for naming conventions in tests/Feature/NamingConventionTest.php (PascalCase → snake_case → kebab-case transformations)
+- [X] T025 [P] [US1] Feature test for atomic rollback in tests/Feature/AtomicRollbackTest.php (test failure triggers deletion of all created files)
+- [X] T026 [P] [US1] Feature test for command validation in tests/Feature/CommandValidationTest.php (invalid resource names, invalid field types, reserved words)
 
 ### Stub Templates for User Story 1
 
-- [ ] T027 [P] [US1] Create Model stub template in resources/stubs/model.stub (SoftDeletes, Auditable, fillable, casts, table name)
-- [ ] T028 [P] [US1] Create Controller stub template in resources/stubs/controller.stub (QueryBuilder, Inertia, 7 RESTful methods, Form Requests)
-- [ ] T029 [P] [US1] Create StoreRequest stub template in resources/stubs/store-request.stub (validation rules from field definitions)
-- [ ] T030 [P] [US1] Create UpdateRequest stub template in resources/stubs/update-request.stub (validation rules with unique ignore for current record)
-- [ ] T031 [P] [US1] Create Resource stub template in resources/stubs/resource.stub (API transformation with all fields, timestamps as ISO strings)
-- [ ] T032 [P] [US1] Create Index.vue stub template in resources/stubs/index.vue.stub (TypeScript, DataTable, search/filter/sort, delete confirmation)
-- [ ] T033 [P] [US1] Create Create.vue stub template in resources/stubs/create.vue.stub (TypeScript, Inertia form, reusable Form component)
-- [ ] T034 [P] [US1] Create Edit.vue stub template in resources/stubs/edit.vue.stub (TypeScript, Inertia form, reusable Form component)
-- [ ] T035 [P] [US1] Create Form.vue stub template in resources/stubs/form.vue.stub (TypeScript, Shadcn-vue components, field-specific inputs, error display)
-- [ ] T036 [P] [US1] Create Migration stub template in resources/stubs/migration.stub (table creation, field columns with types/modifiers, foreign keys, indexes)
+- [X] T027 [P] [US1] Create Model stub template in resources/stubs/model.stub (SoftDeletes, Auditable, fillable, casts, table name)
+- [X] T028 [P] [US1] Create Controller stub template in resources/stubs/controller.stub (QueryBuilder, Inertia, 7 RESTful methods, Form Requests)
+- [X] T029 [P] [US1] Create StoreRequest stub template in resources/stubs/store-request.stub (validation rules from field definitions)
+- [X] T030 [P] [US1] Create UpdateRequest stub template in resources/stubs/update-request.stub (validation rules with unique ignore for current record)
+- [X] T031 [P] [US1] Create Resource stub template in resources/stubs/resource.stub (API transformation with all fields, timestamps as ISO strings)
+- [X] T032 [P] [US1] Create Index.vue stub template in resources/stubs/index.vue.stub (TypeScript, DataTable, search/filter/sort, delete confirmation)
+- [X] T033 [P] [US1] Create Create.vue stub template in resources/stubs/create.vue.stub (TypeScript, Inertia form, reusable Form component)
+- [X] T034 [P] [US1] Create Edit.vue stub template in resources/stubs/edit.vue.stub (TypeScript, Inertia form, reusable Form component)
+- [X] T035 [P] [US1] Create Form.vue stub template in resources/stubs/form.vue.stub (TypeScript, Shadcn-vue components, field-specific inputs, error display)
+- [X] T036 [P] [US1] Create Migration stub template in resources/stubs/migration.stub (table creation, field columns with types/modifiers, foreign keys, indexes)
 
 ### Generators for User Story 1
 
-- [ ] T037 [P] [US1] Implement ModelGenerator in src/Generators/ModelGenerator.php (load model.stub, render with resource tokens, handle --no-soft-deletes/--no-auditing flags)
-- [ ] T038 [P] [US1] Implement ControllerGenerator in src/Generators/ControllerGenerator.php (load controller.stub, render with resource tokens, handle QueryBuilder patterns)
-- [ ] T039 [P] [US1] Implement RequestGenerator in src/Generators/RequestGenerator.php (load request stubs, render with validation rules from ValidationRuleBuilder)
-- [ ] T040 [P] [US1] Implement ResourceGenerator in src/Generators/ResourceGenerator.php (load resource.stub, render with field list from field definitions)
-- [ ] T041 [P] [US1] Implement VueGenerator in src/Generators/VueGenerator.php (load vue stubs, render with TypeScript interfaces, handle field-specific input components)
-- [ ] T042 [P] [US1] Implement MigrationGenerator in src/Generators/MigrationGenerator.php (load migration.stub, render with table name, field columns, indexes, foreign keys)
+- [X] T037 [P] [US1] Implement ModelGenerator in src/Generators/ModelGenerator.php (load model.stub, render with resource tokens, handle --no-soft-deletes/--no-auditing flags)
+- [X] T038 [P] [US1] Implement ControllerGenerator in src/Generators/ControllerGenerator.php (load controller.stub, render with resource tokens, handle QueryBuilder patterns)
+- [X] T039 [P] [US1] Implement RequestGenerator in src/Generators/RequestGenerator.php (load request stubs, render with validation rules from ValidationRuleBuilder)
+- [X] T040 [P] [US1] Implement ResourceGenerator in src/Generators/ResourceGenerator.php (load resource.stub, render with field list from field definitions)
+- [X] T041 [P] [US1] Implement VueGenerator in src/Generators/VueGenerator.php (load vue stubs, render with TypeScript interfaces, handle field-specific input components)
+- [X] T042 [P] [US1] Implement MigrationGenerator in src/Generators/MigrationGenerator.php (load migration.stub, render with table name, field columns, indexes, foreign keys)
 
 ### Main Command for User Story 1
 
-- [ ] T043 [US1] Implement MakeCrudCommand in src/Commands/MakeCrudCommand.php (argument/option parsing, orchestrate generators including MigrationGenerator, atomic generation with FileRollback, output levels)
-- [ ] T044 [US1] Add command signature and options (resource, fields, --no-soft-deletes, --no-auditing, --no-views, --table, --force, --quiet, --verbose)
-- [ ] T045 [US1] Implement resource name validation (alphanumeric, starts with letter, 1-50 chars, reserved word check)
-- [ ] T046 [US1] Implement field definition validation (use FieldDefinitionParser, validate types and modifiers)
-- [ ] T047 [US1] Implement atomic generation flow (FileRollback tracking, try-catch, rollback on exception, commit on success)
-- [ ] T048 [US1] Implement output levels (normal with progress indicators, --quiet for errors only, --verbose for detailed logging)
-- [ ] T049 [US1] Add console output messages (success summary with file paths including migration, error messages with actionable guidance, rollback notifications)
+- [X] T043 [US1] Implement MakeCrudCommand in src/Commands/MakeCrudCommand.php (argument/option parsing, orchestrate generators including MigrationGenerator, atomic generation with FileRollback, output levels)
+- [X] T044 [US1] Add command signature and options (resource, fields, --no-soft-deletes, --no-auditing, --no-views, --table, --force, --quiet, --verbose)
+- [X] T045 [US1] Implement resource name validation (alphanumeric, starts with letter, 1-50 chars, reserved word check)
+- [X] T046 [US1] Implement field definition validation (use FieldDefinitionParser, validate types and modifiers)
+- [X] T047 [US1] Implement atomic generation flow (FileRollback tracking, try-catch, rollback on exception, commit on success)
+- [X] T048 [US1] Implement output levels (normal with progress indicators, --quiet for errors only, --verbose for detailed logging)
+- [X] T049 [US1] Add console output messages (success summary with file paths including migration, error messages with actionable guidance, rollback notifications)
 
 ### Quality Validation for User Story 1
 

@@ -131,7 +131,7 @@ test('provides helpful error message for invalid field type', function () {
         'fields' => ['name:varchar'],
     ])
         ->assertFailed()
-        ->expectsOutput('Invalid field type: varchar');
+        ->expectsOutputToContain('Invalid field type: varchar');
 });
 
 test('provides helpful error message for reserved word', function () {

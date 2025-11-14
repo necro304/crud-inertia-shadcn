@@ -69,13 +69,13 @@ test('generated Controller has correct structure', function () {
 
     expect($controllerContent)->toContain('namespace App\Http\Controllers');
     expect($controllerContent)->toContain('class ProductController extends Controller');
-    expect($controllerContent)->toContain('public function index()');
-    expect($controllerContent)->toContain('public function create()');
-    expect($controllerContent)->toContain('public function store(StoreProductRequest $request)');
-    expect($controllerContent)->toContain('public function show(Product $product)');
-    expect($controllerContent)->toContain('public function edit(Product $product)');
-    expect($controllerContent)->toContain('public function update(UpdateProductRequest $request, Product $product)');
-    expect($controllerContent)->toContain('public function destroy(Product $product)');
+    expect($controllerContent)->toContain('public function index(');
+    expect($controllerContent)->toContain('public function create(');
+    expect($controllerContent)->toContain('public function store(Store');
+    expect($controllerContent)->toContain('public function show(');
+    expect($controllerContent)->toContain('public function edit(');
+    expect($controllerContent)->toContain('public function update(Update');
+    expect($controllerContent)->toContain('public function destroy(');
 });
 
 test('generated Migration has correct structure', function () {

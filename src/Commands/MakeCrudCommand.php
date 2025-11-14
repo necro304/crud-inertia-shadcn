@@ -155,10 +155,18 @@ class MakeCrudCommand extends Command
 
     private function checkExistingFiles(string $resourceName): void
     {
-        $modelPath = app_path("Models/{$resourceName}.php");
+        $filesToCheck = [
+            app_path("Models/{$resourceName}.php") => 'Model',
+            app_path("Http/Controllers/{$resourceName}Controller.php") => 'Controller',
+            app_path("Http/Requests/Store{$resourceName}Request.php") => 'StoreRequest',
+            app_path("Http/Requests/Update{$resourceName}Request.php") => 'UpdateRequest',
+            app_path("Http/Resources/{$resourceName}Resource.php") => 'Resource',
+        ];
 
-        if (file_exists($modelPath)) {
-            throw new \RuntimeException("Model '{$resourceName}' already exists. Use --force to overwrite.");
+        foreach ($filesToCheck as $path => $type) {
+            if (file_exists($path)) {
+                throw new \RuntimeException("{$type} already exists at: {$path}. Use --force to overwrite.");
+            }
         }
     }
 

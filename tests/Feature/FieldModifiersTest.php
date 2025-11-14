@@ -86,7 +86,7 @@ test('update request has unique validation with ignore clause', function () {
     $updateRequestContent = File::get(app_path('Http/Requests/UpdateProductRequest.php'));
 
     // Should contain Rule::unique()->ignore() pattern
-    expect($updateRequestContent)->toContain('unique:products,email');
+    expect($updateRequestContent)->toContain("Rule::unique('products', 'email')");
     expect($updateRequestContent)->toContain('ignore');
 });
 

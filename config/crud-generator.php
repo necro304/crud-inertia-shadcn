@@ -111,7 +111,7 @@ return [
             'validation' => ['date'],
         ],
         'datetime' => [
-            'column' => 'datetime',
+            'column' => 'dateTime',
             'cast' => 'datetime',
             'validation' => ['date'],
         ],
