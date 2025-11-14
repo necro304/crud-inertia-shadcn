@@ -1,0 +1,148 @@
+<script setup lang="ts">
+import { Head, Link, router } from '@inertiajs/vue3'
+import { ref } from 'vue'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
+
+interface {{ MODEL }} {
+  id: number
+  {{ TYPE_INTERFACE_FIELDS }}
+  created_at: string
+  updated_at: string
+}
+
+interface Props {
+  {{ MODEL_VARIABLE_PLURAL }}: {
+    data: {{ MODEL }}[]
+    meta: {
+      current_page: number
+      last_page: number
+      per_page: number
+      total: number
+    }
+  }
+}
+
+const props = defineProps<Props>()
+
+const search = ref('')
+const deleteDialogOpen = ref(false)
+const itemToDelete = ref<{{ MODEL }} | null>(null)
+
+const handleSearch = () => {
+  router.get(route('{{ ROUTE_NAME }}.index'), { search: search.value }, {
+    preserveState: true,
+    preserveScroll: true,
+  })
+}
+
+const confirmDelete = (item: {{ MODEL }}) => {
+  itemToDelete.value = item
+  deleteDialogOpen.value = true
+}
+
+const handleDelete = () => {
+  if (itemToDelete.value) {
+    router.delete(route('{{ ROUTE_NAME }}.destroy', itemToDelete.value.id), {
+      onSuccess: () => {
+        deleteDialogOpen.value = false
+        itemToDelete.value = null
+      },
+    })
+  }
+}
+</script>
+
+<template>
+  <Head title="{{ MODEL_PLURAL }}" />
+
+  <div class="container mx-auto py-10">
+    <div class="mb-6 flex items-center justify-between">
+      <h1 class="text-3xl font-bold">{{ MODEL_PLURAL }}</h1>
+      <Button as-child>
+        <Link :href="route('{{ ROUTE_NAME }}.create')">
+          Create {{ MODEL }}
+        </Link>
+      </Button>
+    </div>
+
+    <div class="mb-4">
+      <Input
+        v-model="search"
+        type="text"
+        placeholder="Search..."
+        @input="handleSearch"
+        class="max-w-sm"
+      />
+    </div>
+
+    <div class="rounded-md border">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>ID</TableHead>
+            {{ TABLE_HEADERS }}
+            <TableHead>Created</TableHead>
+            <TableHead class="text-right">Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow v-for="item in props.{{ MODEL_VARIABLE_PLURAL }}.data" :key="item.id">
+            <TableCell>{{ item.id }}</TableCell>
+            {{ TABLE_CELLS }}
+            <TableCell>{{ new Date(item.created_at).toLocaleDateString() }}</TableCell>
+            <TableCell class="text-right">
+              <div class="flex justify-end gap-2">
+                <Button variant="outline" size="sm" as-child>
+                  <Link :href="route('{{ ROUTE_NAME }}.edit', item.id)">
+                    Edit
+                  </Link>
+                </Button>
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  @click="confirmDelete(item)"
+                >
+                  Delete
+                </Button>
+              </div>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </div>
+
+    <AlertDialog :open="deleteDialogOpen" @update:open="deleteDialogOpen = $event">
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete the {{ MODEL_VARIABLE }}.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction @click="handleDelete">Delete</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  </div>
+</template>

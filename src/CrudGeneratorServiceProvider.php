@@ -1,0 +1,33 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Isaac\CrudGenerator;
+
+use Isaac\CrudGenerator\Commands\MakeCrudCommand;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
+
+class CrudGeneratorServiceProvider extends PackageServiceProvider
+{
+    public function configurePackage(Package $package): void
+    {
+        $package
+            ->name('laravel-crud-generator')
+            ->hasConfigFile('crud-generator')
+            ->hasCommand(MakeCrudCommand::class);
+    }
+
+    public function packageRegistered(): void
+    {
+        // Register package services
+    }
+
+    public function packageBooted(): void
+    {
+        // Publish stubs
+        $this->publishes([
+            __DIR__ . '/../resources/stubs' => base_path('stubs/crud-generator'),
+        ], 'crud-generator-stubs');
+    }
+}

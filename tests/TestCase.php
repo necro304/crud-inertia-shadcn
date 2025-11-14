@@ -1,10 +1,10 @@
 <?php
 
-namespace isaac@example.com\crud-generator\Tests;
+namespace Isaac\CrudGenerator\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Isaac\CrudGenerator\CrudGeneratorServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-use isaac@example.com\crud-generator\crud-generatorServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -13,14 +13,14 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'isaac@example.com\\crud-generator\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Isaac\\CrudGenerator\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            crud-generatorServiceProvider::class,
+            CrudGeneratorServiceProvider::class,
         ];
     }
 
@@ -29,9 +29,8 @@ class TestCase extends Orchestra
         config()->set('database.default', 'testing');
 
         /*
-         foreach (\Illuminate\Support\Facades\File::allFiles(__DIR__ . '/../database/migrations') as $migration) {
-            (include $migration->getRealPath())->up();
-         }
-         */
+        $migration = include __DIR__.'/../database/migrations/create_crud_generator_table.php.stub';
+        $migration->up();
+        */
     }
 }
