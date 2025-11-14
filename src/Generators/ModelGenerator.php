@@ -91,7 +91,7 @@ class ModelGenerator
     {
         $useSoftDeletes = $options['soft_deletes'] ?? config('crud-generator.defaults.soft_deletes', true);
 
-        return $useSoftDeletes ? "\nuse Illuminate\\Database\\Eloquent\\SoftDeletes;" : '';
+        return $useSoftDeletes ? "use Illuminate\\Database\\Eloquent\\SoftDeletes;\n" : '';
     }
 
     private function getSoftDeletesTrait(array $options): string
@@ -105,7 +105,7 @@ class ModelGenerator
     {
         $useAuditing = $options['auditing'] ?? config('crud-generator.defaults.auditing', true);
 
-        return $useAuditing ? "\nuse OwenIt\\Auditing\\Contracts\\Auditable;" : '';
+        return $useAuditing ? "use OwenIt\\Auditing\\Contracts\\Auditable;\n" : '';
     }
 
     private function getAuditableTrait(array $options): string

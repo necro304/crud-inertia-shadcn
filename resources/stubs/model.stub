@@ -7,7 +7,6 @@ namespace {{ NAMESPACE }};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 {{ SOFT_DELETES_IMPORT }}{{ AUDITABLE_IMPORT }}
-
 class {{ CLASS }} extends Model
 {
     use HasFactory{{ SOFT_DELETES_TRAIT }}{{ AUDITABLE_TRAIT }};

@@ -53,8 +53,10 @@ test('generated Model has correct structure', function () {
 
     expect($modelContent)->toContain('namespace App\Models');
     expect($modelContent)->toContain('class Product extends Model');
-    expect($modelContent)->toContain('use SoftDeletes');
-    expect($modelContent)->toContain('use Auditable');
+    expect($modelContent)->toContain('use Illuminate\Database\Eloquent\SoftDeletes');
+    expect($modelContent)->toContain('use OwenIt\Auditing\Contracts\Auditable');
+    expect($modelContent)->toContain('use HasFactory, SoftDeletes');
+    expect($modelContent)->toContain('\OwenIt\Auditing\Auditable');
     expect($modelContent)->toContain('protected $fillable');
     expect($modelContent)->toContain('protected $casts');
 });
