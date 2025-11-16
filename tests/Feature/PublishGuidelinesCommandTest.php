@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use Illuminate\Filesystem\Filesystem;
-
 it('publishes guidelines file to .ai/guidelines directory', function () {
     $targetPath = base_path('.ai/guidelines/crud-inertia-shadcn.md');
 
