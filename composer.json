@@ -1,48 +1,49 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "necro304/crud-inertia-shadcn",
+    "description": "Laravel package for generating CRUD with Inertia.js and Shadcn UI",
     "keywords": [
-        ":vendor_name",
         "laravel",
-        ":package_slug"
+        "crud",
+        "inertia",
+        "vue",
+        "shadcn",
+        "generator",
+        "package"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/necro304/crud-inertia-shadcn",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "necro304",
+            "email": "necro304@example.com",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^8.4",
-        "spatie/laravel-package-tools": "^1.16",
-        "illuminate/contracts": "^11.0||^12.0"
+        "php": "^8.4|^8.3",
+        "illuminate/contracts": "^12.0",
+        "spatie/laravel-package-tools": "^1.16"
     },
     "require-dev": {
         "laravel/pint": "^1.14",
         "nunomaduro/collision": "^8.8",
         "larastan/larastan": "^3.0",
-        "orchestra/testbench": "^10.0.0||^9.0.0",
+        "orchestra/testbench": "^10.0",
         "pestphp/pest": "^4.0",
         "pestphp/pest-plugin-arch": "^4.0",
         "pestphp/pest-plugin-laravel": "^4.0",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan-deprecation-rules": "^2.0",
-        "phpstan/phpstan-phpunit": "^2.0",
-        "spatie/laravel-ray": "^1.35"
+        "phpstan/phpstan-phpunit": "^2.0"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Necro304\\CrudInertiaShadcn\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/",
-            "Workbench\\App\\": "workbench/app/"
+            "Necro304\\CrudInertiaShadcn\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -63,12 +64,13 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
-            ],
-            "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
-            }
+                "Necro304\\CrudInertiaShadcn\\CrudGeneratorServiceProvider"
+            ]
         }
+    },
+    "support": {
+        "issues": "https://github.com/necro304/crud-inertia-shadcn/issues",
+        "source": "https://github.com/necro304/crud-inertia-shadcn"
     },
     "minimum-stability": "dev",
     "prefer-stable": true

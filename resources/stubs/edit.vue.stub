@@ -1,0 +1,45 @@
+<script setup lang="ts">
+import { Head, useForm } from '@inertiajs/vue3'
+import {{ MODEL }}Form from './Form.vue'
+
+interface {{ MODEL }} {
+  id: number
+  {{ TYPE_INTERFACE_FIELDS }}
+  created_at: string
+  updated_at: string
+}
+
+interface Props {
+  {{ MODEL_VARIABLE }}: {{ MODEL }}
+}
+
+const props = defineProps<Props>()
+
+interface {{ MODEL }}FormData {
+  {{ FORM_INTERFACE_FIELDS }}
+}
+
+const form = useForm<{{ MODEL }}FormData>({
+  {{ FORM_EDIT_VALUES }}
+})
+
+const submit = () => {
+  form.put(route('{{ ROUTE_NAME }}.update', props.{{ MODEL_VARIABLE }}.id))
+}
+</script>
+
+<template>
+  <Head title="Edit {{ MODEL }}" />
+
+  <div class="container mx-auto py-10">
+    <div class="mb-6">
+      <h1 class="text-3xl font-bold">Edit {{ MODEL }}</h1>
+    </div>
+
+    <{{ MODEL }}Form
+      :form="form"
+      :is-editing="true"
+      @submit="submit"
+    />
+  </div>
+</template>

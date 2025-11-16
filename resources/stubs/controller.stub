@@ -1,0 +1,105 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ NAMESPACE }};
+
+use {{ MODEL_NAMESPACE }}\{{ MODEL }};
+use {{ REQUEST_NAMESPACE }}\Store{{ MODEL }}Request;
+use {{ REQUEST_NAMESPACE }}\Update{{ MODEL }}Request;
+use {{ RESOURCE_NAMESPACE }}\{{ MODEL }}Resource;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
+use Spatie\QueryBuilder\QueryBuilder;
+
+class {{ CLASS }} extends Controller
+{
+    use AuthorizesRequests;
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request): Response
+    {
+        ${{ MODEL_VARIABLE_PLURAL }} = QueryBuilder::for({{ MODEL }}::class)
+            {{ EAGER_LOAD }}->allowedFilters([{{ ALLOWED_FILTERS }}])
+            ->allowedSorts([{{ ALLOWED_SORTS }}])
+            ->paginate($request->input('per_page', 15))
+            ->withQueryString();
+
+        return Inertia::render('{{ VUE_DIRECTORY }}/Index', [
+            '{{ MODEL_VARIABLE_PLURAL }}' => {{ MODEL }}Resource::collection(${{ MODEL_VARIABLE_PLURAL }}),
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create(): Response
+    {
+        return Inertia::render('{{ VUE_DIRECTORY }}/Create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Store{{ MODEL }}Request $request): RedirectResponse
+    {
+        ${{ MODEL_VARIABLE }} = {{ MODEL }}::create($request->validated());
+
+        return redirect()
+            ->route('{{ ROUTE_NAME }}.show', ${{ MODEL_VARIABLE }})
+            ->with('success', '{{ MODEL }} created successfully.');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show({{ MODEL }} ${{ MODEL_VARIABLE }}): Response
+    {
+        {{ EAGER_LOAD_SHOW }}
+
+        return Inertia::render('{{ VUE_DIRECTORY }}/Show', [
+            '{{ MODEL_VARIABLE }}' => new {{ MODEL }}Resource(${{ MODEL_VARIABLE }}),
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit({{ MODEL }} ${{ MODEL_VARIABLE }}): Response
+    {
+        {{ EAGER_LOAD_EDIT }}
+
+        return Inertia::render('{{ VUE_DIRECTORY }}/Edit', [
+            '{{ MODEL_VARIABLE }}' => new {{ MODEL }}Resource(${{ MODEL_VARIABLE }}),
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Update{{ MODEL }}Request $request, {{ MODEL }} ${{ MODEL_VARIABLE }}): RedirectResponse
+    {
+        ${{ MODEL_VARIABLE }}->update($request->validated());
+
+        return redirect()
+            ->route('{{ ROUTE_NAME }}.show', ${{ MODEL_VARIABLE }})
+            ->with('success', '{{ MODEL }} updated successfully.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy({{ MODEL }} ${{ MODEL_VARIABLE }}): RedirectResponse
+    {
+        ${{ MODEL_VARIABLE }}->delete();
+
+        return redirect()
+            ->route('{{ ROUTE_NAME }}.index')
+            ->with('success', '{{ MODEL }} deleted successfully.');
+    }
+}

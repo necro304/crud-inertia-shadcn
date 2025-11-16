@@ -1,0 +1,35 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ NAMESPACE }};
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+{{ SOFT_DELETES_IMPORT }}{{ AUDITABLE_IMPORT }}
+class {{ CLASS }} extends Model
+{
+    use HasFactory{{ SOFT_DELETES_TRAIT }}{{ AUDITABLE_TRAIT }};
+
+    {{ TABLE_PROPERTY }}
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        {{ FILLABLE }}
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        {{ CASTS }}
+    ];
+
+    {{ RELATIONSHIPS }}
+}

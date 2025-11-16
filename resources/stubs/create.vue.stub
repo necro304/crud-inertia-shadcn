@@ -1,0 +1,32 @@
+<script setup lang="ts">
+import { Head, useForm } from '@inertiajs/vue3'
+import {{ MODEL }}Form from './Form.vue'
+
+interface {{ MODEL }}FormData {
+  {{ FORM_INTERFACE_FIELDS }}
+}
+
+const form = useForm<{{ MODEL }}FormData>({
+  {{ FORM_INITIAL_VALUES }}
+})
+
+const submit = () => {
+  form.post(route('{{ ROUTE_NAME }}.store'))
+}
+</script>
+
+<template>
+  <Head title="Create {{ MODEL }}" />
+
+  <div class="container mx-auto py-10">
+    <div class="mb-6">
+      <h1 class="text-3xl font-bold">Create {{ MODEL }}</h1>
+    </div>
+
+    <{{ MODEL }}Form
+      :form="form"
+      :is-editing="false"
+      @submit="submit"
+    />
+  </div>
+</template>

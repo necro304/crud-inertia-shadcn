@@ -30,3 +30,18 @@ phpstan.neon
 testbench.yaml
 /docs
 /coverage
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+
+# Package specific
+*.log
+*.cache
