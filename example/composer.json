@@ -11,7 +11,7 @@
     "require": {
         "php": "^8.2",
         "inertiajs/inertia-laravel": "^2.0",
-        "necro304/crud-inertia-shadcn": "dev-001-crud-generator-package",
+        "necro304/crud-inertia-shadcn": "dev-main",
         "laravel/fortify": "^1.30",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
