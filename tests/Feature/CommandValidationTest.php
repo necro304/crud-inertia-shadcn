@@ -1,6 +1,6 @@
 <?php
 
-use Isaac\CrudGenerator\Commands\MakeCrudCommand;
+use Necro304\CrudInertiaShadcn\Commands\MakeCrudCommand;
 
 test('rejects invalid resource name with special characters', function () {
     $this->artisan(MakeCrudCommand::class, [

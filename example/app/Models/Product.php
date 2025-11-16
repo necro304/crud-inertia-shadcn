@@ -7,13 +7,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use OwenIt\Auditing\Contracts\Auditable;
 
 class Product extends Model
 {
-    use HasFactory, SoftDeletes, \OwenIt\Auditing\Auditable;
-
-    
+    use HasFactory, \OwenIt\Auditing\Auditable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -25,7 +22,7 @@ class Product extends Model
         'description',
         'price',
         'stock',
-        'is_active'
+        'is_active',
     ];
 
     /**
@@ -38,8 +35,6 @@ class Product extends Model
         'description' => 'string',
         'price' => 'decimal:2',
         'stock' => 'integer',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
-
-    
 }

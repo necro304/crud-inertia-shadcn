@@ -1,10 +1,10 @@
 <?php
 
-use Isaac\CrudGenerator\Parsers\FieldDefinitionParser;
+use Necro304\CrudInertiaShadcn\Parsers\FieldDefinitionParser;
 
 describe('FieldDefinitionParser', function () {
     test('parses basic field definition without modifiers', function () {
-        $parser = new FieldDefinitionParser();
+        $parser = new FieldDefinitionParser;
         $field = $parser->parse('name:string');
 
         expect($field)->toHaveKeys(['name', 'type', 'modifiers']);
@@ -14,7 +14,7 @@ describe('FieldDefinitionParser', function () {
     });
 
     test('parses field definition with nullable modifier', function () {
-        $parser = new FieldDefinitionParser();
+        $parser = new FieldDefinitionParser;
         $field = $parser->parse('email:string:nullable');
 
         expect($field['name'])->toBe('email');
@@ -23,7 +23,7 @@ describe('FieldDefinitionParser', function () {
     });
 
     test('parses field definition with unique modifier', function () {
-        $parser = new FieldDefinitionParser();
+        $parser = new FieldDefinitionParser;
         $field = $parser->parse('slug:string:unique');
 
         expect($field['name'])->toBe('slug');
@@ -32,7 +32,7 @@ describe('FieldDefinitionParser', function () {
     });
 
     test('parses field definition with combined modifiers', function () {
-        $parser = new FieldDefinitionParser();
+        $parser = new FieldDefinitionParser;
         $field = $parser->parse('email:string:nullable:unique');
 
         expect($field['name'])->toBe('email');
@@ -43,7 +43,7 @@ describe('FieldDefinitionParser', function () {
     });
 
     test('supports all required field types', function () {
-        $parser = new FieldDefinitionParser();
+        $parser = new FieldDefinitionParser;
         $types = ['string', 'text', 'integer', 'decimal', 'boolean', 'date', 'datetime', 'timestamp', 'json'];
 
         foreach ($types as $type) {
@@ -53,27 +53,27 @@ describe('FieldDefinitionParser', function () {
     });
 
     test('throws exception for invalid field definition format', function () {
-        $parser = new FieldDefinitionParser();
+        $parser = new FieldDefinitionParser;
         $parser->parse('invalid_field');
     })->throws(InvalidArgumentException::class);
 
     test('throws exception for invalid field type', function () {
-        $parser = new FieldDefinitionParser();
+        $parser = new FieldDefinitionParser;
         $parser->parse('field:invalid_type');
     })->throws(InvalidArgumentException::class);
 
     test('throws exception for invalid modifier', function () {
-        $parser = new FieldDefinitionParser();
+        $parser = new FieldDefinitionParser;
         $parser->parse('field:string:invalid_modifier');
     })->throws(InvalidArgumentException::class);
 
     test('throws exception for empty field name', function () {
-        $parser = new FieldDefinitionParser();
+        $parser = new FieldDefinitionParser;
         $parser->parse(':string');
     })->throws(InvalidArgumentException::class);
 
     test('parses multiple field definitions correctly', function () {
-        $parser = new FieldDefinitionParser();
+        $parser = new FieldDefinitionParser;
         $fields = [
             'name:string',
             'price:decimal:nullable',

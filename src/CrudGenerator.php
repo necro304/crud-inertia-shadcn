@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Isaac\CrudGenerator;
+namespace Necro304\CrudInertiaShadcn;
 
-use Isaac\CrudGenerator\Generators\ControllerGenerator;
-use Isaac\CrudGenerator\Generators\MigrationGenerator;
-use Isaac\CrudGenerator\Generators\ModelGenerator;
-use Isaac\CrudGenerator\Generators\RequestGenerator;
-use Isaac\CrudGenerator\Generators\ResourceGenerator;
-use Isaac\CrudGenerator\Generators\VueGenerator;
-use Isaac\CrudGenerator\Parsers\FieldDefinitionParser;
-use Isaac\CrudGenerator\Support\CrudGenerationResult;
-use Isaac\CrudGenerator\Support\FileRollback;
+use Necro304\CrudInertiaShadcn\Generators\ControllerGenerator;
+use Necro304\CrudInertiaShadcn\Generators\MigrationGenerator;
+use Necro304\CrudInertiaShadcn\Generators\ModelGenerator;
+use Necro304\CrudInertiaShadcn\Generators\RequestGenerator;
+use Necro304\CrudInertiaShadcn\Generators\ResourceGenerator;
+use Necro304\CrudInertiaShadcn\Generators\VueGenerator;
+use Necro304\CrudInertiaShadcn\Parsers\FieldDefinitionParser;
+use Necro304\CrudInertiaShadcn\Support\CrudGenerationResult;
+use Necro304\CrudInertiaShadcn\Support\FileRollback;
 
 final class CrudGenerator
 {
@@ -41,7 +41,7 @@ final class CrudGenerator
             $this->checkExistingFiles($resourceName);
         }
 
-        $rollback = new FileRollback();
+        $rollback = new FileRollback;
         $files = [];
 
         try {
@@ -90,6 +90,7 @@ final class CrudGenerator
 
     /**
      * @param array<int, array<string, mixed>> $fields
+     *
      * @return array<string, string>
      */
     private function generateRequests(string $resourceName, array $fields, FileRollback $rollback): array
@@ -129,6 +130,7 @@ final class CrudGenerator
 
     /**
      * @param array<int, array<string, mixed>> $fields
+     *
      * @return array<string, string>
      */
     private function generateVueComponents(string $resourceName, array $fields, FileRollback $rollback): array
@@ -144,6 +146,7 @@ final class CrudGenerator
 
     /**
      * @param array<int, string> $fieldDefinitions
+     *
      * @return array<int, array<string, mixed>>
      */
     private function parseFields(array $fieldDefinitions): array
@@ -205,6 +208,7 @@ final class CrudGenerator
 
     /**
      * @param array<string, mixed> $options
+     *
      * @return array<string, mixed>
      */
     private function prepareOptions(array $options): array

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Isaac\CrudGenerator\Support;
+namespace Necro304\CrudInertiaShadcn\Support;
 
 use Illuminate\Support\Str;
 

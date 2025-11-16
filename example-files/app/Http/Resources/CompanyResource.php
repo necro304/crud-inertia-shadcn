@@ -19,7 +19,7 @@ class CompanyResource extends JsonResource
             'name' => $this->name,
             'legal_name' => $this->legal_name,
             'nit' => $this->nit,
-            'logo' => $this->logo ? asset('storage/'.$this->logo) : null,
+            'logo' => $this->logo ? asset('storage/' . $this->logo) : null,
             'active' => $this->active,
             'created_at' => $this->created_at?->toISOString(),
             'updated_at' => $this->updated_at?->toISOString(),

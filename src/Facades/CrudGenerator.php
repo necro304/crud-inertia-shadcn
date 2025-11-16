@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Isaac\CrudGenerator\Facades;
+namespace Necro304\CrudInertiaShadcn\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Isaac\CrudGenerator\Support\CrudGenerationResult;
+use Necro304\CrudInertiaShadcn\Support\CrudGenerationResult;
 
 /**
  * @method static CrudGenerationResult generate(string $resourceName, array $fieldDefinitions, array $options = [])
  *
- * @see \Isaac\CrudGenerator\CrudGenerator
+ * @see \Necro304\CrudInertiaShadcn\CrudGenerator
  */
 final class CrudGenerator extends Facade
 {

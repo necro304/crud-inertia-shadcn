@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Isaac\CrudGenerator\Parsers;
+namespace Necro304\CrudInertiaShadcn\Parsers;
 
 use InvalidArgumentException;
 
@@ -34,7 +34,8 @@ class FieldDefinitionParser
     /**
      * Parse field definition string into structured array
      *
-     * @param  string  $definition  Format: name:type or name:type:modifier1:modifier2
+     * @param string $definition Format: name:type or name:type:modifier1:modifier2
+     *
      * @return array{name: string, type: string, modifiers: array<string>}
      *
      * @throws InvalidArgumentException

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
+use App\Models\Product;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -60,7 +60,6 @@ class ProductController extends Controller
      */
     public function show(Product $product): Response
     {
-        
 
         return Inertia::render('Products/Show', [
             'product' => new ProductResource($product),
@@ -72,7 +71,6 @@ class ProductController extends Controller
      */
     public function edit(Product $product): Response
     {
-        
 
         return Inertia::render('Products/Edit', [
             'product' => new ProductResource($product),

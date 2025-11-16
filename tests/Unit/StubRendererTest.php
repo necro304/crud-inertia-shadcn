@@ -1,10 +1,10 @@
 <?php
 
-use Isaac\CrudGenerator\Support\StubRenderer;
+use Necro304\CrudInertiaShadcn\Support\StubRenderer;
 
 describe('StubRenderer', function () {
     test('replaces single token in stub template', function () {
-        $renderer = new StubRenderer();
+        $renderer = new StubRenderer;
         $template = 'Hello {{ NAME }}!';
         $result = $renderer->render($template, ['NAME' => 'World']);
 
@@ -12,7 +12,7 @@ describe('StubRenderer', function () {
     });
 
     test('replaces multiple tokens in stub template', function () {
-        $renderer = new StubRenderer();
+        $renderer = new StubRenderer;
         $template = 'class {{ CLASS }} extends {{ PARENT }}';
         $result = $renderer->render($template, [
             'CLASS' => 'Product',
@@ -23,7 +23,7 @@ describe('StubRenderer', function () {
     });
 
     test('replaces same token multiple times', function () {
-        $renderer = new StubRenderer();
+        $renderer = new StubRenderer;
         $template = '{{ NAME }} is {{ NAME }}';
         $result = $renderer->render($template, ['NAME' => 'test']);
 
@@ -31,7 +31,7 @@ describe('StubRenderer', function () {
     });
 
     test('preserves template when no tokens provided', function () {
-        $renderer = new StubRenderer();
+        $renderer = new StubRenderer;
         $template = 'class Product extends Model';
         $result = $renderer->render($template, []);
 
@@ -39,7 +39,7 @@ describe('StubRenderer', function () {
     });
 
     test('ignores tokens not in template', function () {
-        $renderer = new StubRenderer();
+        $renderer = new StubRenderer;
         $template = 'Hello {{ NAME }}';
         $result = $renderer->render($template, [
             'NAME' => 'World',
@@ -50,7 +50,7 @@ describe('StubRenderer', function () {
     });
 
     test('handles empty string tokens', function () {
-        $renderer = new StubRenderer();
+        $renderer = new StubRenderer;
         $template = 'class {{ CLASS }}';
         $result = $renderer->render($template, ['CLASS' => '']);
 
@@ -58,7 +58,7 @@ describe('StubRenderer', function () {
     });
 
     test('handles complex multi-line templates', function () {
-        $renderer = new StubRenderer();
+        $renderer = new StubRenderer;
         $template = <<<'STUB'
 <?php
 
@@ -82,7 +82,7 @@ STUB;
     });
 
     test('preserves whitespace and indentation', function () {
-        $renderer = new StubRenderer();
+        $renderer = new StubRenderer;
         $template = "    public function {{ METHOD }}()\n    {\n        // code\n    }";
         $result = $renderer->render($template, ['METHOD' => 'store']);
 
@@ -91,7 +91,7 @@ STUB;
     });
 
     test('handles tokens with special characters in values', function () {
-        $renderer = new StubRenderer();
+        $renderer = new StubRenderer;
         $template = 'protected $table = \'{{ TABLE }}\';';
         $result = $renderer->render($template, ['TABLE' => 'users_test']);
 
@@ -99,7 +99,7 @@ STUB;
     });
 
     test('loads stub from file and renders', function () {
-        $renderer = new StubRenderer();
+        $renderer = new StubRenderer;
         $stubPath = __DIR__ . '/../fixtures/test.stub';
 
         // Create a temporary test stub

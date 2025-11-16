@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Isaac\CrudGenerator\Parsers;
+namespace Necro304\CrudInertiaShadcn\Parsers;
 
 use InvalidArgumentException;
 
@@ -26,9 +26,10 @@ class ValidationRuleBuilder
     /**
      * Build validation rules for a field
      *
-     * @param  string  $name  Field name
-     * @param  string  $type  Field type
-     * @param  array<string>  $modifiers  Field modifiers
+     * @param string $name Field name
+     * @param string $type Field type
+     * @param array<string> $modifiers Field modifiers
+     *
      * @return array<string>
      *
      * @throws InvalidArgumentException
@@ -62,11 +63,12 @@ class ValidationRuleBuilder
     /**
      * Build validation rules for update operations
      *
-     * @param  string  $name  Field name
-     * @param  string  $type  Field type
-     * @param  array<string>  $modifiers  Field modifiers
-     * @param  string  $tableName  Table name for unique rule
-     * @param  int|string  $ignoreId  ID to ignore in unique validation
+     * @param string $name Field name
+     * @param string $type Field type
+     * @param array<string> $modifiers Field modifiers
+     * @param string $tableName Table name for unique rule
+     * @param int|string $ignoreId ID to ignore in unique validation
+     *
      * @return array<string>
      *
      * @throws InvalidArgumentException

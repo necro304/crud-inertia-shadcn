@@ -4,7 +4,7 @@
 Laravel CRUD Generator package that generates complete CRUD modules with Vue 3 + Inertia.js + Shadcn-vue integration.
 
 ## Package Name
-isaac/laravel-crud-generator
+necro304/crud-inertia-shadcn
 
 ## Description
 A Laravel package for generating complete CRUD modules including:

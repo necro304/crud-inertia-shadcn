@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Isaac\CrudGenerator\Support;
+namespace Necro304\CrudInertiaShadcn\Support;
 
 class StubRenderer
 {
     /**
      * Render a stub template with token replacements
      *
-     * @param  string  $template  Stub template content
-     * @param  array<string, string>  $tokens  Token replacements
-     * @return string
+     * @param string $template Stub template content
+     * @param array<string, string> $tokens Token replacements
      */
     public function render(string $template, array $tokens): string
     {
@@ -28,9 +27,8 @@ class StubRenderer
     /**
      * Load stub from file and render with tokens
      *
-     * @param  string  $stubPath  Path to stub file
-     * @param  array<string, string>  $tokens  Token replacements
-     * @return string
+     * @param string $stubPath Path to stub file
+     * @param array<string, string> $tokens Token replacements
      */
     public function renderFromFile(string $stubPath, array $tokens): string
     {

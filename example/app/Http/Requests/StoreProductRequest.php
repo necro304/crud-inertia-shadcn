@@ -28,7 +28,7 @@ class StoreProductRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'price' => ['required', 'numeric'],
             'stock' => ['required', 'integer'],
-            'is_active' => ['required', 'boolean']
+            'is_active' => ['required', 'boolean'],
         ];
     }
 
@@ -44,7 +44,7 @@ class StoreProductRequest extends FormRequest
             'description' => 'Description',
             'price' => 'Price',
             'stock' => 'Stock',
-            'is_active' => 'Is Active'
+            'is_active' => 'Is Active',
         ];
     }
 }

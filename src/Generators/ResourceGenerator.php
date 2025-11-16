@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Isaac\CrudGenerator\Generators;
+namespace Necro304\CrudInertiaShadcn\Generators;
 
-use Isaac\CrudGenerator\Support\StubRenderer;
 use Illuminate\Support\Facades\File;
+use Necro304\CrudInertiaShadcn\Support\StubRenderer;
 
 class ResourceGenerator
 {
     public function __construct(
-        private readonly StubRenderer $renderer = new StubRenderer()
-    ) {
-    }
+        private readonly StubRenderer $renderer = new StubRenderer
+    ) {}
 
     /**
      * Generate API Resource file
      *
-     * @param  string  $resourceName  PascalCase resource name
-     * @param  array<array{name: string, type: string, modifiers: array<string>}>  $fields
-     * @param  array<string, mixed>  $options
-     * @return string  Path to generated file
+     * @param string $resourceName PascalCase resource name
+     * @param array<array{name: string, type: string, modifiers: array<string>}> $fields
+     * @param array<string, mixed> $options
+     *
+     * @return string Path to generated file
      */
     public function generate(string $resourceName, array $fields, array $options = []): string
     {

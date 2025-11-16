@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Isaac\CrudGenerator\Generators;
+namespace Necro304\CrudInertiaShadcn\Generators;
 
-use Isaac\CrudGenerator\Parsers\ValidationRuleBuilder;
-use Isaac\CrudGenerator\Support\NamingConverter;
-use Isaac\CrudGenerator\Support\StubRenderer;
 use Illuminate\Support\Facades\File;
+use Necro304\CrudInertiaShadcn\Parsers\ValidationRuleBuilder;
+use Necro304\CrudInertiaShadcn\Support\NamingConverter;
+use Necro304\CrudInertiaShadcn\Support\StubRenderer;
 
 class RequestGenerator
 {
     public function __construct(
-        private readonly StubRenderer $renderer = new StubRenderer(),
-        private readonly ValidationRuleBuilder $ruleBuilder = new ValidationRuleBuilder()
-    ) {
-    }
+        private readonly StubRenderer $renderer = new StubRenderer,
+        private readonly ValidationRuleBuilder $ruleBuilder = new ValidationRuleBuilder
+    ) {}
 
     /**
      * Generate Store and Update Request files
      *
-     * @param  string  $resourceName  PascalCase resource name
-     * @param  array<array{name: string, type: string, modifiers: array<string>}>  $fields
-     * @return array{store: string, update: string}  Paths to generated files
+     * @param string $resourceName PascalCase resource name
+     * @param array<array{name: string, type: string, modifiers: array<string>}> $fields
+     *
+     * @return array{store: string, update: string} Paths to generated files
      */
     public function generate(string $resourceName, array $fields): array
     {

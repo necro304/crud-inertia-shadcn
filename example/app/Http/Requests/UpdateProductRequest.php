@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class UpdateProductRequest extends FormRequest
 {
@@ -29,7 +28,7 @@ class UpdateProductRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'price' => ['required', 'numeric'],
             'stock' => ['required', 'integer'],
-            'is_active' => ['required', 'boolean']
+            'is_active' => ['required', 'boolean'],
         ];
     }
 
@@ -45,7 +44,7 @@ class UpdateProductRequest extends FormRequest
             'description' => 'Description',
             'price' => 'Price',
             'stock' => 'Stock',
-            'is_active' => 'Is Active'
+            'is_active' => 'Is Active',
         ];
     }
 }

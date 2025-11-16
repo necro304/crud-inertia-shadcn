@@ -1,5 +1,5 @@
 <?php
 
-use Isaac\CrudGenerator\Tests\TestCase;
+use Necro304\CrudInertiaShadcn\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

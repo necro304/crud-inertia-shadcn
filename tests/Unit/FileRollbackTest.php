@@ -1,6 +1,6 @@
 <?php
 
-use Isaac\CrudGenerator\Support\FileRollback;
+use Necro304\CrudInertiaShadcn\Support\FileRollback;
 
 describe('FileRollback', function () {
     beforeEach(function () {
@@ -17,7 +17,7 @@ describe('FileRollback', function () {
     });
 
     test('tracks created file', function () {
-        $rollback = new FileRollback();
+        $rollback = new FileRollback;
         $filePath = $this->testDir . '/test.txt';
 
         file_put_contents($filePath, 'test content');
@@ -27,7 +27,7 @@ describe('FileRollback', function () {
     });
 
     test('rollback deletes tracked files', function () {
-        $rollback = new FileRollback();
+        $rollback = new FileRollback;
         $filePath = $this->testDir . '/test.txt';
 
         file_put_contents($filePath, 'test content');
@@ -38,7 +38,7 @@ describe('FileRollback', function () {
     });
 
     test('rollback handles multiple files', function () {
-        $rollback = new FileRollback();
+        $rollback = new FileRollback;
         $file1 = $this->testDir . '/file1.txt';
         $file2 = $this->testDir . '/file2.txt';
         $file3 = $this->testDir . '/file3.txt';
@@ -59,7 +59,7 @@ describe('FileRollback', function () {
     });
 
     test('commit prevents rollback deletion', function () {
-        $rollback = new FileRollback();
+        $rollback = new FileRollback;
         $filePath = $this->testDir . '/test.txt';
 
         file_put_contents($filePath, 'test content');
@@ -71,7 +71,7 @@ describe('FileRollback', function () {
     });
 
     test('rollback is safe when file already deleted', function () {
-        $rollback = new FileRollback();
+        $rollback = new FileRollback;
         $filePath = $this->testDir . '/test.txt';
 
         file_put_contents($filePath, 'test content');
@@ -84,7 +84,7 @@ describe('FileRollback', function () {
     });
 
     test('rollback deletes in reverse order', function () {
-        $rollback = new FileRollback();
+        $rollback = new FileRollback;
         $deletionOrder = [];
 
         // Track files in specific order
@@ -105,7 +105,7 @@ describe('FileRollback', function () {
     });
 
     test('can track and rollback after previous commit', function () {
-        $rollback = new FileRollback();
+        $rollback = new FileRollback;
 
         // First batch
         $file1 = $this->testDir . '/file1.txt';
@@ -124,7 +124,7 @@ describe('FileRollback', function () {
     });
 
     test('reset clears tracked files without deleting', function () {
-        $rollback = new FileRollback();
+        $rollback = new FileRollback;
         $filePath = $this->testDir . '/test.txt';
 
         file_put_contents($filePath, 'test content');
@@ -136,7 +136,7 @@ describe('FileRollback', function () {
     });
 
     test('throws exception when tracking non-existent file', function () {
-        $rollback = new FileRollback();
+        $rollback = new FileRollback;
         $rollback->track($this->testDir . '/non_existent.txt');
     })->throws(InvalidArgumentException::class);
 });

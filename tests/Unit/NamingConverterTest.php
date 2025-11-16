@@ -1,6 +1,6 @@
 <?php
 
-use Isaac\CrudGenerator\Support\NamingConverter;
+use Necro304\CrudInertiaShadcn\Support\NamingConverter;
 
 describe('NamingConverter', function () {
     test('toPascalCase converts snake_case to PascalCase', function () {

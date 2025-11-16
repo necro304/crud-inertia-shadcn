@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\File;
-use Isaac\CrudGenerator\Commands\MakeCrudCommand;
+use Necro304\CrudInertiaShadcn\Commands\MakeCrudCommand;
 
 afterEach(function () {
     cleanupModifierTestFiles();

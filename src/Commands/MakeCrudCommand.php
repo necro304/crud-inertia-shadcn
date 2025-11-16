@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Isaac\CrudGenerator\Commands;
+namespace Necro304\CrudInertiaShadcn\Commands;
 
 use Illuminate\Console\Command;
-use Isaac\CrudGenerator\CrudGenerator;
-use Isaac\CrudGenerator\Support\CrudGenerationResult;
+use Necro304\CrudInertiaShadcn\CrudGenerator;
+use Necro304\CrudInertiaShadcn\Support\CrudGenerationResult;
 
 class MakeCrudCommand extends Command
 {

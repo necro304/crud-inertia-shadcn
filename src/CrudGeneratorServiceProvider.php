@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Isaac\CrudGenerator;
+namespace Necro304\CrudInertiaShadcn;
 
-use Isaac\CrudGenerator\Commands\MakeCrudCommand;
+use Necro304\CrudInertiaShadcn\Commands\MakeCrudCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 

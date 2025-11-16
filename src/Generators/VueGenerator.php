@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Isaac\CrudGenerator\Generators;
+namespace Necro304\CrudInertiaShadcn\Generators;
 
-use Isaac\CrudGenerator\Support\NamingConverter;
-use Isaac\CrudGenerator\Support\StubRenderer;
 use Illuminate\Support\Facades\File;
+use Necro304\CrudInertiaShadcn\Support\NamingConverter;
+use Necro304\CrudInertiaShadcn\Support\StubRenderer;
 
 class VueGenerator
 {
     public function __construct(
-        private readonly StubRenderer $renderer = new StubRenderer()
-    ) {
-    }
+        private readonly StubRenderer $renderer = new StubRenderer
+    ) {}
 
     /**
      * Generate Vue component files
      *
-     * @param  string  $resourceName  PascalCase resource name
-     * @param  array<array{name: string, type: string, modifiers: array<string>}>  $fields
+     * @param string $resourceName PascalCase resource name
+     * @param array<array{name: string, type: string, modifiers: array<string>}> $fields
+     *
      * @return array{index: string, create: string, edit: string, form: string}
      */
     public function generate(string $resourceName, array $fields): array

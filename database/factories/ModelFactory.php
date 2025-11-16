@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Isaac\CrudGenerator\Database\Factories;
+namespace Necro304\CrudInertiaShadcn\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

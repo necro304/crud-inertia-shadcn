@@ -1,21 +1,21 @@
 {
-    "name": "isaac/laravel-crud-generator",
-    "description": "A Laravel package for generating complete CRUD modules with Vue 3 + Inertia.js + Shadcn-vue",
+    "name": "necro304/crud-inertia-shadcn",
+    "description": "Laravel package for generating CRUD with Inertia.js and Shadcn UI",
     "keywords": [
         "laravel",
         "crud",
-        "generator",
         "inertia",
         "vue",
-        "shadcn-vue",
-        "code-generator"
+        "shadcn",
+        "generator",
+        "package"
     ],
-    "homepage": "https://github.com/isaac/laravel-crud-generator",
+    "homepage": "https://github.com/necro304/crud-inertia-shadcn",
     "license": "MIT",
     "authors": [
         {
-            "name": "Isaac",
-            "email": "isaac@example.com",
+            "name": "necro304",
+            "email": "necro304@example.com",
             "role": "Developer"
         }
     ],
@@ -38,12 +38,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Isaac\\CrudGenerator\\": "src/"
+            "Necro304\\CrudInertiaShadcn\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Isaac\\CrudGenerator\\Tests\\": "tests/"
+            "Necro304\\CrudInertiaShadcn\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -64,9 +64,13 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Isaac\\CrudGenerator\\CrudGeneratorServiceProvider"
+                "Necro304\\CrudInertiaShadcn\\CrudGeneratorServiceProvider"
             ]
         }
+    },
+    "support": {
+        "issues": "https://github.com/necro304/crud-inertia-shadcn/issues",
+        "source": "https://github.com/necro304/crud-inertia-shadcn"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
