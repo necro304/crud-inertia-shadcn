@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Necro304\CrudInertiaShadcn;
 
 use Necro304\CrudInertiaShadcn\Commands\MakeCrudCommand;
+use Necro304\CrudInertiaShadcn\Commands\PublishGuidelinesCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -15,7 +16,10 @@ class CrudGeneratorServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-crud-generator')
             ->hasConfigFile('crud-generator')
-            ->hasCommand(MakeCrudCommand::class);
+            ->hasCommands([
+                MakeCrudCommand::class,
+                PublishGuidelinesCommand::class,
+            ]);
     }
 
     public function packageRegistered(): void

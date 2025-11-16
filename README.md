@@ -148,6 +148,39 @@ php artisan make:crud Category name:string --no-views
 php artisan make:crud Product name:string --force
 ```
 
+## AI Assistant Guidelines
+
+This package includes AI assistant guidelines to help tools like Claude Code, GitHub Copilot, or Cursor AI understand how to work with the generated code.
+
+### Publish Guidelines
+
+Publish the AI guidelines to your project's `.ai/guidelines/` directory:
+
+```bash
+php artisan crud-generator:publish-guidelines
+```
+
+This creates `.ai/guidelines/crud-inertia-shadcn.md` with:
+- Complete usage documentation
+- Backend and frontend code patterns
+- Best practices and conventions
+- Common customizations
+- Troubleshooting guide
+
+**Benefits:**
+- 🤖 AI assistants understand your CRUD patterns
+- 📚 Consistent code generation aligned with package conventions
+- 🎯 Better suggestions for extending generated code
+- 💡 Context-aware recommendations
+
+**Options:**
+```bash
+# Overwrite existing guidelines
+php artisan crud-generator:publish-guidelines --force
+```
+
+The guidelines file can be customized to match your specific project needs and coding standards.
+
 ## Generated Code Patterns
 
 ### Model Example
