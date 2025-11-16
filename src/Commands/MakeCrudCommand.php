@@ -5,14 +5,8 @@ declare(strict_types=1);
 namespace Isaac\CrudGenerator\Commands;
 
 use Illuminate\Console\Command;
-use Isaac\CrudGenerator\Generators\ControllerGenerator;
-use Isaac\CrudGenerator\Generators\MigrationGenerator;
-use Isaac\CrudGenerator\Generators\ModelGenerator;
-use Isaac\CrudGenerator\Generators\RequestGenerator;
-use Isaac\CrudGenerator\Generators\ResourceGenerator;
-use Isaac\CrudGenerator\Generators\VueGenerator;
-use Isaac\CrudGenerator\Parsers\FieldDefinitionParser;
-use Isaac\CrudGenerator\Support\FileRollback;
+use Isaac\CrudGenerator\CrudGenerator;
+use Isaac\CrudGenerator\Support\CrudGenerationResult;
 
 class MakeCrudCommand extends Command
 {
@@ -27,260 +21,64 @@ class MakeCrudCommand extends Command
 
     protected $description = 'Generate a complete CRUD module with Model, Controller, Requests, Resource, Vue components, and Migration';
 
-    private FileRollback $rollback;
-
-    private FieldDefinitionParser $parser;
-
-    public function __construct()
+    public function __construct(private readonly CrudGenerator $generator)
     {
         parent::__construct();
-        $this->rollback = new FileRollback();
-        $this->parser = new FieldDefinitionParser();
     }
 
     public function handle(): int
     {
         try {
-            // Validate inputs
             $resourceName = $this->argument('resource');
             $fieldDefinitions = $this->argument('fields');
+            $result = $this->generator->generate($resourceName, $fieldDefinitions, $this->commandOptions());
 
-            $this->validateResourceName($resourceName);
-            $this->validateFields($fieldDefinitions);
-
-            // Parse fields
-            $fields = $this->parseFields($fieldDefinitions);
-
-            // Prepare options
-            $options = $this->prepareOptions();
-
-            // Check for existing files if not forcing
-            if (! $this->option('force')) {
-                $this->checkExistingFiles($resourceName);
-            }
-
-            // Start generation
-            $this->outputMessage('Generating CRUD files...', 'info');
-
-            // Generate all files atomically
-            $this->generateModel($resourceName, $fields, $options);
-            $this->generateController($resourceName, $fields, $options);
-            $this->generateRequests($resourceName, $fields);
-            $this->generateResource($resourceName, $fields, $options);
-            $this->generateMigration($resourceName, $fields, $options);
-
-            if (! $this->option('no-views')) {
-                $this->generateVueComponents($resourceName, $fields);
-            }
-
-            // Commit all files
-            $this->rollback->commit();
-
-            // Success message
-            $this->outputSuccess($resourceName, $options);
+            $this->outputSuccess($result);
 
             return self::SUCCESS;
-        } catch (\Exception $e) {
-            // Rollback on any error
-            $this->rollback->rollback();
-
-            $this->outputMessage('Error: ' . $e->getMessage(), 'error');
-            $this->outputMessage('All changes have been rolled back.', 'comment');
+        } catch (\Throwable $e) {
+            $this->error('Error: ' . $e->getMessage());
+            $this->comment('All changes have been rolled back.');
 
             return self::FAILURE;
         }
     }
 
-    private function validateResourceName(string $resourceName): void
-    {
-        // Check empty
-        if (empty($resourceName)) {
-            throw new \InvalidArgumentException('Resource name cannot be empty.');
-        }
-
-        // Check length (1-50 characters)
-        if (strlen($resourceName) > 50) {
-            throw new \InvalidArgumentException('Resource name must be 50 characters or less.');
-        }
-
-        // Check format: alphanumeric and underscores, starting with letter
-        if (! preg_match('/^[a-zA-Z][a-zA-Z0-9_]*$/', $resourceName)) {
-            throw new \InvalidArgumentException('Resource name must be alphanumeric, start with a letter, and may contain underscores.');
-        }
-
-        // Check reserved words
-        $reservedWords = config('crud-generator.reserved_words', []);
-        if (in_array(strtolower($resourceName), $reservedWords)) {
-            throw new \InvalidArgumentException("'{$resourceName}' is a reserved word and cannot be used as a resource name.");
-        }
-    }
-
-    private function validateFields(array $fieldDefinitions): void
-    {
-        if (empty($fieldDefinitions)) {
-            throw new \InvalidArgumentException('At least one field definition is required.');
-        }
-
-        foreach ($fieldDefinitions as $definition) {
-            try {
-                $this->parser->parse($definition);
-            } catch (\InvalidArgumentException $e) {
-                throw new \InvalidArgumentException("Invalid field definition '{$definition}': {$e->getMessage()}");
-            }
-        }
-    }
-
-    private function parseFields(array $fieldDefinitions): array
-    {
-        $fields = [];
-
-        foreach ($fieldDefinitions as $definition) {
-            $fields[] = $this->parser->parse($definition);
-        }
-
-        return $fields;
-    }
-
-    private function prepareOptions(): array
+    /**
+     * @return array<string, mixed>
+     */
+    private function commandOptions(): array
     {
         return [
             'soft_deletes' => ! $this->option('no-soft-deletes'),
             'auditing' => ! $this->option('no-auditing'),
             'generate_views' => ! $this->option('no-views'),
             'table' => $this->option('table'),
-            'force' => $this->option('force'),
-            'relationships' => '', // Will be populated in Phase 5
+            'force' => (bool) $this->option('force'),
+            'relationships' => '',
         ];
     }
 
-    private function checkExistingFiles(string $resourceName): void
-    {
-        $filesToCheck = [
-            app_path("Models/{$resourceName}.php") => 'Model',
-            app_path("Http/Controllers/{$resourceName}Controller.php") => 'Controller',
-            app_path("Http/Requests/Store{$resourceName}Request.php") => 'StoreRequest',
-            app_path("Http/Requests/Update{$resourceName}Request.php") => 'UpdateRequest',
-            app_path("Http/Resources/{$resourceName}Resource.php") => 'Resource',
-        ];
-
-        foreach ($filesToCheck as $path => $type) {
-            if (file_exists($path)) {
-                throw new \RuntimeException("{$type} already exists at: {$path}. Use --force to overwrite.");
-            }
-        }
-    }
-
-    private function generateModel(string $resourceName, array $fields, array $options): void
-    {
-        $this->outputVerbose('Generating Model...');
-
-        $generator = new ModelGenerator();
-        $filePath = $generator->generate($resourceName, $fields, $options);
-
-        $this->rollback->track($filePath);
-        $this->outputVerbose("✓ Model created: {$filePath}");
-    }
-
-    private function generateController(string $resourceName, array $fields, array $options): void
-    {
-        $this->outputVerbose('Generating Controller...');
-
-        $generator = new ControllerGenerator();
-        $filePath = $generator->generate($resourceName, $fields, $options);
-
-        $this->rollback->track($filePath);
-        $this->outputVerbose("✓ Controller created: {$filePath}");
-    }
-
-    private function generateRequests(string $resourceName, array $fields): void
-    {
-        $this->outputVerbose('Generating Form Requests...');
-
-        $generator = new RequestGenerator();
-        $filePaths = $generator->generate($resourceName, $fields);
-
-        $this->rollback->track($filePaths['store']);
-        $this->rollback->track($filePaths['update']);
-
-        $this->outputVerbose("✓ Store Request created: {$filePaths['store']}");
-        $this->outputVerbose("✓ Update Request created: {$filePaths['update']}");
-    }
-
-    private function generateResource(string $resourceName, array $fields, array $options): void
-    {
-        $this->outputVerbose('Generating API Resource...');
-
-        $generator = new ResourceGenerator();
-        $filePath = $generator->generate($resourceName, $fields, $options);
-
-        $this->rollback->track($filePath);
-        $this->outputVerbose("✓ Resource created: {$filePath}");
-    }
-
-    private function generateVueComponents(string $resourceName, array $fields): void
-    {
-        $this->outputVerbose('Generating Vue components...');
-
-        $generator = new VueGenerator();
-        $filePaths = $generator->generate($resourceName, $fields);
-
-        foreach ($filePaths as $key => $path) {
-            $this->rollback->track($path);
-            $this->outputVerbose("✓ Vue {$key} created: {$path}");
-        }
-    }
-
-    private function generateMigration(string $resourceName, array $fields, array $options): void
-    {
-        $this->outputVerbose('Generating Migration...');
-
-        $generator = new MigrationGenerator();
-        $filePath = $generator->generate($resourceName, $fields, $options);
-
-        $this->rollback->track($filePath);
-        $this->outputVerbose("✓ Migration created: {$filePath}");
-    }
-
-    private function outputMessage(string $message, string $type = 'line'): void
-    {
-        if (! $this->option('quiet') || $type === 'error') {
-            $this->{$type}($message);
-        }
-    }
-
-    private function outputVerbose(string $message): void
-    {
-        if ($this->option('verbose')) {
-            $this->line($message);
-        }
-    }
-
-    private function outputSuccess(string $resourceName, array $options): void
+    private function outputSuccess(CrudGenerationResult $result): void
     {
         if ($this->option('quiet')) {
             return;
         }
 
         $this->newLine();
-        $this->info("✓ CRUD generated successfully for '{$resourceName}'!");
+        $this->info("✓ CRUD generated successfully for '{$result->resourceName}'!");
         $this->newLine();
 
-        $fileCount = $options['generate_views'] ? 10 : 6;
-        $this->line("Generated {$fileCount} files:");
-        $this->line("  • Model");
-        $this->line("  • Controller");
-        $this->line("  • 2 Form Requests (Store, Update)");
-        $this->line("  • API Resource");
-        $this->line("  • Migration");
+        $this->line(sprintf('Generated %d files:', $result->fileCount()));
 
-        if ($options['generate_views']) {
-            $this->line("  • 4 Vue Components (Index, Create, Edit, Form)");
+        foreach ($result->flatFiles() as $type => $path) {
+            $this->line(sprintf('  • %s -> %s', $type, $path));
         }
 
         $this->newLine();
         $this->comment('Next steps:');
         $this->line('  1. Run: php artisan migrate');
-        $this->line("  2. Add routes to routes/web.php");
-        $this->line("  3. Register components in your app");
+        $this->line('  2. Add routes to routes/web.php');
+        $this->line('  3. Register components in your app');
     }
 }

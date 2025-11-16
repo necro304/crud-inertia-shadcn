@@ -20,7 +20,8 @@ class CrudGeneratorServiceProvider extends PackageServiceProvider
 
     public function packageRegistered(): void
     {
-        // Register package services
+        $this->app->singleton(CrudGenerator::class);
+        $this->app->alias(CrudGenerator::class, 'crud-generator');
     }
 
     public function packageBooted(): void
