@@ -1,35 +1,35 @@
-# CRUD Inertia Shadcn - Módulo CRUD
+# CRUD Inertia Shadcn - CRUD Module
 
-Guía para generar módulos CRUD completos con **necro304/crud-inertia-shadcn**:
+Guide to generate complete CRUD modules with **necro304/crud-inertia-shadcn**:
 - **Backend**: Laravel 12, Spatie Query Builder, Auditing, Soft Deletes
 - **Frontend**: Vue 3, TypeScript, Inertia.js v2, Shadcn-vue, TanStack Table
 
-## Generar CRUD
+## Generate CRUD
 
 ```bash
 php artisan make:crud Product name:string description:text price:decimal:nullable stock:integer
 ```
 
-**Genera**:
+**Generates**:
 - Model (SoftDeletes, Auditable)
 - Controller (QueryBuilder, Inertia)
 - Form Requests (Store/Update)
 - API Resource
 - Vue pages (Index, Create, Edit, Show)
-- Componente Form (Shadcn UI)
+- Form Component (Shadcn UI)
 - Migration
 
-### Opciones del Comando
+### Command Options
 
 ```bash
-php artisan make:crud Post --no-soft-deletes  # Sin soft deletes
-php artisan make:crud Comment --no-auditing   # Sin auditing
-php artisan make:crud Tag --no-views          # Solo backend
-php artisan make:crud UserProfile --table=profiles  # Tabla personalizada
-php artisan make:crud Product --force         # Sobrescribir archivos
+php artisan make:crud Post --no-soft-deletes  # Without soft deletes
+php artisan make:crud Comment --no-auditing   # Without auditing
+php artisan make:crud Tag --no-views          # Backend only
+php artisan make:crud UserProfile --table=profiles  # Custom table name
+php artisan make:crud Product --force         # Overwrite existing files
 ```
 
-### Sintaxis de Campos
+### Field Syntax
 
 ```bash
 name:string
@@ -39,7 +39,7 @@ is_active:boolean
 published_at:timestamp:nullable
 ```
 
-## Estructura Generada
+## Generated Structure
 
 ```
 app/
@@ -53,16 +53,16 @@ app/
 database/migrations/xxxx_create_products_table.php
 
 resources/js/pages/products/
-├── Index.vue        # Lista con DataTable
-├── Create.vue       # Formulario creación
-├── Edit.vue         # Formulario edición
-├── Show.vue         # Vista detalle
+├── Index.vue        # List with DataTable
+├── Create.vue       # Creation form
+├── Edit.vue         # Edit form
+├── Show.vue         # Detail view
 └── components/ProductForm.vue
 ```
 
-## Patrones Backend
+## Backend Patterns
 
-### Controller con Filtros
+### Controller with Filters
 
 ```php
 use Spatie\QueryBuilder\{QueryBuilder, AllowedFilter};
@@ -90,7 +90,7 @@ public function index()
 }
 ```
 
-### Upload de Archivos
+### File Upload
 
 ```php
 // Validation
@@ -101,13 +101,13 @@ if ($request->hasFile('image')) {
     $data['image'] = $request->file('image')->store('products/images', 'public');
 }
 
-// Update (eliminar anterior)
+// Update (delete previous)
 if ($request->hasFile('image') && $product->image) {
     \Storage::disk('public')->delete($product->image);
 }
 ```
 
-## Patrones Frontend
+## Frontend Patterns
 
 ### Index Page (DataTable)
 
@@ -121,7 +121,7 @@ const props = defineProps<{
   products: PaginatedResponse<Product>
 }>()
 
-// Búsqueda con debounce
+// Search with debounce
 const search = ref('')
 const debouncedSearch = useDebounceFn((value: string) => {
   router.visit(route('products.index'), {
@@ -168,23 +168,23 @@ const submit = () => {
 </template>
 ```
 
-## Mejores Prácticas
+## Best Practices
 
 **Backend**:
-- ✅ Eager load relationships con `with()` (prevenir N+1)
-- ✅ Validación en Form Requests, nunca en controllers
-- ✅ Soft Deletes para integridad de datos
-- ✅ Auditing para rastreo de cambios
+- ✅ Eager load relationships with `with()` (prevent N+1)
+- ✅ Validation in Form Requests, never in controllers
+- ✅ Soft Deletes for data integrity
+- ✅ Auditing for change tracking
 
 **Frontend**:
-- ✅ Interfaces TypeScript para props y responses
-- ✅ `useCrudColumns` para definiciones consistentes
-- ✅ `useDebounceFn` para búsquedas
-- ✅ `preserveState: true` en filtros
+- ✅ TypeScript interfaces for props and responses
+- ✅ `useCrudColumns` for consistent definitions
+- ✅ `useDebounceFn` for searches
+- ✅ `preserveState: true` in filters
 
-## Personalizaciones Comunes
+## Common Customizations
 
-### Agregar Relaciones
+### Add Relationships
 
 ```php
 // app/Models/Product.php
@@ -196,7 +196,7 @@ public function category(): BelongsTo {
 ->with(['category'])
 ```
 
-### Filtros Personalizados
+### Custom Filters
 
 ```php
 AllowedFilter::callback('price_range', function ($q, $v) {
@@ -212,7 +212,7 @@ AllowedFilter::callback('price_range', function ($q, $v) {
 Route::resource('products', ProductController::class);
 ```
 
-## Publicar Stubs
+## Publish Stubs
 
 ```bash
 php artisan vendor:publish --tag=crud-generator-stubs
